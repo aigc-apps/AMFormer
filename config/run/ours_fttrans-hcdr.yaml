@@ -1,0 +1,23 @@
+__base__:
+  - config/base_schedule.yaml
+  - config/models/ours_fttrans_final.yaml
+  - config/datasets/hcdr.yaml
+
+exp_name: TEST #ft-trans
+gpu_id: 7
+use_prod: True
+token_descent: False
+max_iter: 10000
+lr: 0.001
+stepvalues: [4000]
+
+
+train_size: 1
+
+
+prod_num_per_group: [4, 4, 4] #[8, 8, 8]
+groups: [120, 120, 120] #[136, 136, 136]
+# num_per_group: [32, 16, 8]
+sum_num_per_group: [32, 32, 32]
+qk_relu: False
+exp_param: [train_size]

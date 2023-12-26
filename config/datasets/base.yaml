@@ -1,0 +1,5 @@
+num_workers: 4
+warmup_steps: 1000
+num_special_tokens: 2
+use_sigmoid: True
+train_size: 1

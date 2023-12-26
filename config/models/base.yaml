@@ -1,0 +1,14 @@
+
+attn_dropout: 0.2
+ff_dropout: 0.1
+attn_drop: 0.2
+ffn_drop: 0.1
+has_ff: True
+# For autoint
+has_residual: True
+# For FT-Trans
+cls_token_split: False
+dim: 192
+heads: 8
+qk_relu: False
+use_amp: False
