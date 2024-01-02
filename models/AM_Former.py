@@ -371,6 +371,8 @@ class FTTransformer(nn.Module):
 
     def forward(self, x_categ, x_numer, label, step=0):
 
+        # print(x_categ.shape, x_numer.shape, label.shape)
+
 
         # x_categ, x_numer = x # x_categ: 离散的特征，x_numer：连续的特征
 

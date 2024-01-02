@@ -24,8 +24,7 @@ class MyDataset(data_utils.Dataset):
         self.data_list = []
 
         self.metric_name = 'AUC'
-
-        self.mix = args.mix if dataset == 'train' else False
+        
         # if dataset in ['train', 'valid']:
         if args.model_name == 'node':
             file = '/home/ceyu.cy2/datasets/tabular/Credit/application_train_node.h5'
@@ -78,23 +77,7 @@ class MyDataset(data_utils.Dataset):
         label = copy.deepcopy(self.label[idx])
 
 
-        if self.mix:
-            while True:
-                a = random.randint(0, len(self.label) // 2)
-                b = random.randint(len(self.label) // 2, len(self.label) - 1)
-                try:
-                    idx2 = self.label.index(label, a, b)
-                    break
-                except:
-                    pass
-
-            cont2 = copy.deepcopy(self.cont[idx2])
-            cate2 = copy.deepcopy(self.cate[idx2])
-
-            return torch.LongTensor(cate), torch.FloatTensor(cont), label, torch.LongTensor(cate2), torch.FloatTensor(cont2)
-        
-        else: 
-            return torch.LongTensor(cate), torch.FloatTensor(cont), label
+        return torch.LongTensor(cate), torch.FloatTensor(cont), label
     
     def evaluate(self, label, pred):
         return roc_auc_score(label.item(), pred[:,1].item())
