@@ -1,5 +1,4 @@
 import torch
-import torchvision.transforms as transforms
 from config.cfg import BaseConfig
 import training 
 import os

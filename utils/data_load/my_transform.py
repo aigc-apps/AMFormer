@@ -1,13 +1,7 @@
 import torchvision
-import random
-import numbers
 import math
 import torch
 from torchvision.transforms import functional as F
-import PIL
-import numpy as np
-from PIL import Image, ImageOps
-from torch.autograd import Variable
 
 
 class GroupResizeResize(torch.nn.Module):

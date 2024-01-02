@@ -1,14 +1,9 @@
-import os, sys
+import os
 import torch
-import torch.nn as nn
-import numpy as np
 import models
 from tensorboardX import SummaryWriter
-
 from config.cfg import arg2str
-from torch.autograd import Variable
 from torchmetrics import Accuracy, AUROC, MeanSquaredError
-import copy
 from torch.cuda.amp import autocast, GradScaler
 
 

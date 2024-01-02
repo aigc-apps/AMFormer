@@ -1,6 +1,5 @@
 import torch
 from torch.autograd import Variable
-import numpy as np
 import torch
 import sys
 import time
