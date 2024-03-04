@@ -1,0 +1,21 @@
+__base__:
+  - config/models/base.yaml
+
+gpu_id: 6
+ckpt: None
+model_name: ours_fttrans
+groups: [54, 54, 54] #[136, 136, 136]
+sum_num_per_group: [32, 16, 8]
+prod_num_per_group: [6, 6, 6]
+token_descent: False
+use_prod: True
+target_mode: mix # mix (target + x --> target让target对数据存在一个shift)/ None
+cluster: True #True
+use_cls_token: True
+depth: 3
+
+
+
+
+
+

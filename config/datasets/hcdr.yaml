@@ -1,0 +1,27 @@
+__base__:
+  - config/datasets/base.yaml
+
+val_split: False
+data_name: hcdr
+num_cate: 16
+num_cont: 104
+max_cate: 1
+cate_mask_value: 0
+cont_mask_value: -1
+categories: [2,3,2,2,8,8,5,6,6,19,7,58,5,4,8,3]
+save_metric: acc
+batch_size: 256
+val_freq: 100
+out: 2
+validation_after: 0
+max_iter: 30000
+stepvalues: [10000, 20000]
+lr: 0.001
+trainer: delta
+validation_set: test
+val_split: True
+
+
+
+
+

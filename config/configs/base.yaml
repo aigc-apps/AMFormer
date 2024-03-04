@@ -1,0 +1,47 @@
+exp_name: test
+gpu_id: 1
+save_folder: result/save_model/
+save_log: result/save_log/
+data_name: pretrain
+fold: -1
+
+start_iter: 0
+max_iter: 20000
+warmup_steps: 1000
+num_classes: 8
+use_amp: False
+use_amp_in_eval: False
+
+mix: False
+trainer: single
+lr: 0.01
+lr_adjust: fix
+stepvalues: [1000, 2000, 3000]
+weights: [1, 1]
+
+time_delay: 0
+
+debug: False
+
+sub_iter: 0
+weight_decay: 0.0005
+gamma: 0.1
+momentum: 0.9
+train_batch_size: 16
+val_batch_size: 16
+optim: Adam
+save_freq: 400
+display_freq: 20
+val_freq: -1
+num_workers: 4
+
+single_optim: True
+pretrain_weights: None
+
+seed: 42
+batch_size: 128
+
+split_sets: 2
+missing_ratio: 0
+
+inference: False
