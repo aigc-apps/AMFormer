@@ -1,43 +1,48 @@
-### 启动训练
-训练启动命令：
-python main.py --config config/run/ours_fttrans-hcdr.yaml
-### 配置文件
-参数通过config/run/ours_fttrans-hcdr.yaml传递
-run下的config通过以下内容来继承模型/数据的config
+# AMFormer
+The AMFormer algorithm, accepted at AAAI-2024, for deep tabular learning
+
+### Quick Start
+All configurations are written in the config file, and the training process can be started directly with the following command:
+`python main.py --config config/run/ours_fttrans-hcdr.yaml`
+### Configuration
+Parameters are passed through `config/run/ours_<model_name>-<dataset_name>.yaml`. 
+The config under run inherits the config of the model/data with the following format:
 ```python
 __base__:
   - config/base_schedule.yaml
   - config/models/ours_fttrans_final.yaml
   - config/datasets/hcdr.yaml
 ```
-### 输入/输出数据格式
-dataset每次pop出来的数据格式为：
-离散的特征数据（长度为num_cate的Tensor），连续的特征数据（长度为num_cont的Tensor），标签
-输出给模型时会在batch size维度进行stack，最终得到`bs * num_cate`, `bs * num_cont`, `bs`的输入内容
+### Input and output format
+The model receives three inputs, which are:
+Categorical feature data (shape = bs * num_cate), 
+continuous feature data (shape = bs * num_cont), 
+labels (shape = bs).
 
-输出为logit, loss
-### 模型参数
+The output is a list: [logits, loss].
+
+### Model's parameters
 ```
-默认参数在(models/AM_Former.py第278行开始，解释在303行开始)
-dim 特征的维度，即bs * num_cate * dim里的dim
-depth 模型中transformer的层数
-heads 多头注意力里的头的个数
-attn_dropout 注意力矩阵的dropout
-ff_dropout 前馈层的dropout
-use_cls_token 是否使用class token进行分类（实际上效果区别不大）
-groups AMFormer中下一层特征数的数量。一般而言，在特征数量较少的情况下，如果该值=输入的特征树；特征数量较大时（>200）会进行特征减少，比如[128, 64, 64]
-sum_num_per_group AMFormer每一层中每一组需要针对多少个特征进行求和
-prod_num_per_group AMFormer每一层中每一组需要针对多少个特征进行求带幂乘法（一般该值小于等于sum_num_per_group）
-cluster 是否使用AMFormer的注意力，如果为False就使用vanilla attention
-target_mode 对prompt的操作，是否和原始数据进行混合
-token_descent 如果设置为True，就必须使用cluster，如果是False，可以选择是否使用cluster
-use_prod 是否使用乘法模块（会增加计算量）
-num_special_tokens 输入特征中的特殊值比如0可能代表控制，一般默认为2就行
-num_unique_categories 离散特征的数量
-out 输出结果是几分类
-num_cont 离散特征特征数（在表中有几列特征是离散的）
-num_cate 连续特征特征数（在表中有几列特征是连续的）
-use_sigmoid 在out=1的时候是否对输出结果计算sigmoid
+Default parameters start on line 278 of (models/AM_Former.py), with explanations starting on line 303:
+- `dim`: The dimension of features, i.e., the `dim` in `bs * num_cate * dim`.
+- `depth`: The number of layers of the transformer in the model.
+- `heads`: The number of heads in the multi-head attention.
+- `attn_dropout`: The dropout rate for the attention matrix.
+- `ff_dropout`: The dropout rate for the feed-forward layers.
+- `use_cls_token`: Whether to use a class token for classification (in practice, the difference is not significant).
+- `groups`: The number of features in the next layer in AMFormer. Generally, if the number of features is small, this value can be equal to or larger than the input feature number; for a larger number of features (>200), feature reduction is performed, such as [128, 64, 64].
+- `sum_num_per_group`: In each layer of AMFormer, the number of features each group needs to sum.
+- `prod_num_per_group`: In each layer of AMFormer, the number of features each group needs for exponentiated multiplication (usually this value is less than or equal to sum_num_per_group).
+- `cluster`: Whether to use AMFormer's attention; if `False`, vanilla attention is used.
+- `target_mode`: The operation on the prompt, whether to mix with the original data.
+- `token_descent`: If set to `True`, `cluster` must be used; if `False`, the use of `cluster` is optional.
+- `use_prod`: Whether to use the multiplication module (which will increase computation).
+- `num_special_tokens`: The number of special values in the input features, for example, 0 could represent a null value.
+- `num_unique_categories`: The number of distinct categorical features.
+- `out`: The number of classes for the output result.
+- `num_cont`: The number of discrete feature columns (how many feature columns are discrete in the table).
+- `num_cate`: The number of continuous feature columns (how many feature columns are continuous in the table).
+- `use_sigmoid`: Whether to calculate sigmoid for the output when `out`=1.
 ```
 
 
