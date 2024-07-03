@@ -3,7 +3,7 @@ __base__:
 
 gpu_id: 6
 ckpt: None
-model_name: ours_fttrans
+model_name: amformer
 groups: [54, 54, 54] #[136, 136, 136]
 sum_num_per_group: [32, 16, 8]
 prod_num_per_group: [6, 6, 6]

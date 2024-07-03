@@ -23,26 +23,26 @@ class DefaultTrainer(object):
         self.warmup_steps = args.warmup_steps
 
 
-        # self.model = getattr(models, args.model_name.lower())(args)
-        self.model = models.amformer(dim = 192,
-                                depth = 3,
-                                heads = 8,
-                                attn_dropout = 0.2,
-                                ff_dropout = 0.1,
-                                use_cls_token = True,
-                                groups = [120, 120, 120],
-                                sum_num_per_group = [32, 32, 32],
-                                prod_num_per_group = [6, 6, 6],
-                                cluster = True,
-                                target_mode = 'mix',
-                                token_descent = False, #True,
-                                use_prod = True,
-                                num_special_tokens = 2,
-                                num_unique_categories = 10000,
-                                out = 2,
-                                num_cont = 104,
-                                num_cate = 16,
-                                use_sigmoid = True,)
+        self.model = getattr(models, args.model_name.lower())(args)
+        # self.model = models.amformer(dim = 192,
+        #                         depth = 3,
+        #                         heads = 8,
+        #                         attn_dropout = 0.2,
+        #                         ff_dropout = 0.1,
+        #                         use_cls_token = True,
+        #                         groups = [120, 120, 120],
+        #                         sum_num_per_group = [32, 32, 32],
+        #                         prod_num_per_group = [6, 6, 6],
+        #                         cluster = True,
+        #                         target_mode = 'mix',
+        #                         token_descent = False, #True,
+        #                         use_prod = True,
+        #                         num_special_tokens = 2,
+        #                         num_unique_categories = 10000,
+        #                         out = 2,
+        #                         num_cont = 104,
+        #                         num_cate = 16,
+        #                         use_sigmoid = True,)
 
 
 
